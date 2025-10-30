@@ -1,7 +1,11 @@
 ; JP / JPE → Jump if Parity Even
+
 section .data
-    msg_even db "Parity Even (PF=1)",10,0
-    msg_odd db "Parity Odd (PF=0)",10,0
+    msg_even db "Parity Even (PF=1) - Keittah Sewe, 151426",10,0
+    len_even equ $ - msg_even
+
+    msg_odd db "Parity Odd (PF=0) - Keittah Sewe, 151426",10,0
+    len_odd equ $ - msg_odd
 
 section .text
     global _start
@@ -10,18 +14,20 @@ _start:
     test al,al
     jp even
 
+odd:
     mov ecx, msg_odd
+    mov edx, len_odd
     jmp print
 
 even:
     mov ecx, msg_even
+    mov edx, len_even
 
 print:
-    mov eax,4
-    mov ebx,1
-    mov edx,40
+    mov eax,4       ; syscall: sys_write
+    mov ebx,1       ; file descriptor: stdout
     int 0x80
 
-    mov eax,1
+    mov eax,1       ; syscall: sys_exit
     xor ebx,ebx
     int 0x80

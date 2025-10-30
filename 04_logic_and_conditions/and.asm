@@ -9,6 +9,7 @@
 ; start the file on gdb terminal : gdb --silent and
 
 section .data
+
     val1 db 0b10101010   ; 170 decimal
     val2 db 0b11001100   ; 204 decimal
 
