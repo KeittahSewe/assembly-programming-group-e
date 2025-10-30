@@ -25,8 +25,9 @@ above:
     mov edx, len_above
 
 print:
-    mov eax,4       ; syscall number for sys_write
-    mov ebx,1       ; file descriptor (stdout)
+    mov eax,4
+    mov ebx,1
+    mov edx,30
     int 0x80
 
     mov eax,1       ; syscall number for sys_exit
